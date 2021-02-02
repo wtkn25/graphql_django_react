@@ -1,8 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
+import { Grid } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import jwtDecode from "jwt-decode";
 import React, { useEffect } from 'react';
 import { GET_DEPTS, GET_EMPLOYEES } from "../queries";
+import EmployeeList from "./EmployeeList";
 import styles from "./MainPage.module.css";
 
 const MainPage = () => {
@@ -50,6 +52,13 @@ const MainPage = () => {
           }}
         />
       </h1>
+      <Grid container>
+        <Grid item xs={5}>
+          <EmployeeList dataEmployees={dataEmployees} />
+        </Grid>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={3}></Grid>
+      </Grid>
     </div>
   )
 }
