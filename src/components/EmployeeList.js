@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import DeleteIcon from "@material-ui/icons/Delete";
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import EditIcon from "@material-ui/icons/Edit";
 import React, { useContext } from 'react';
 import { StateContext } from "../context/StateContext";
@@ -62,6 +63,20 @@ const EmployeeList = ({ dataEmployees }) => {
                     setName(empl.node.name);
                     setJoinYear(empl.node.joinYear);
                     setSelectedDept(empl.node.department.id);
+                  }}
+                />
+                <DragIndicatorIcon
+                  className={styles.employeeList__detail}
+                  onClick={async () => {
+                    try {
+                      await getSingleEmployee({
+                        variables: {
+                          id: empl.node.id,
+                        },
+                      });
+                    } catch (err) {
+                      alert(err.message)
+                    }
                   }}
                 />
               </div>
