@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export const CREATE_USER = gql`
   mutation ($username: String!, $password: String!) {
@@ -36,6 +36,27 @@ export const GET_EMPLOYEES = gql`
     }
   }
 `
+
+export const CREATE_DEPT = gql`
+  mutation($deptName: String!) {
+    createDept(input: { deptName: $deptName }) {
+      department {
+        id
+        deptName
+      }
+    }
+  }
+`;
+
+export const DELETE_DEPT = gql`
+  mutation($id: ID!) {
+    deleteDept(input: { id: $id }) {
+      department {
+        id
+      }
+    }
+  }
+`;
 
 export const GET_DEPTS = gql`
   query {

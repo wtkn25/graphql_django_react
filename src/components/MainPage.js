@@ -4,6 +4,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import jwtDecode from "jwt-decode";
 import React, { useEffect } from 'react';
 import { GET_DEPTS, GET_EMPLOYEES } from "../queries";
+import DeptList from "./DeptList";
 import EmployeeCreate from "./EmployeeCreate";
 import EmployeeDetails from "./EmployeeDetails";
 import EmployeeList from "./EmployeeList";
@@ -60,7 +61,7 @@ const MainPage = () => {
           <EmployeeList dataEmployees={dataEmployees} />
         </Grid>
         <Grid item xs={4}><EmployeeDetails /></Grid>
-        <Grid item xs={3}></Grid>
+        <Grid item xs={3}><DeptList dataDepts={dataDepts} /></Grid>
       </Grid>
     </div>
   )
