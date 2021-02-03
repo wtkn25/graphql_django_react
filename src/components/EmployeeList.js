@@ -1,7 +1,24 @@
-import React from 'react';
+import { useMutation } from "@apollo/client";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import React, { useContext } from 'react';
+import { StateContext } from "../context/StateContext";
+import { DELETE_EMPLOYEE, GET_EMPLOYEES } from "../queries";
 import styles from "./EmployeeList.module.css";
 
 const EmployeeList = ({ dataEmployees }) => {
+  const {
+    setName,
+    setJoinYear,
+    setSelectedDept,
+    setEditedId,
+    dataSingleEmployee,
+    getSingleEmployee,
+  } = useContext(StateContext);
+  const [deleteEmployee] = useMutation(DELETE_EMPLOYEE, {
+    refetchQueries: [{ query: GET_EMPLOYEES }],
+  });
+
   return (
     <>
       <h3>Employee List</h3>
@@ -16,6 +33,38 @@ const EmployeeList = ({ dataEmployees }) => {
                 {" / "}
                 {empl.node.department.deptName}
               </span>
+              <div>
+                <DeleteIcon
+                  className={styles.employeeList__delete}
+                  onClick={async () => {
+                    try {
+                      await deleteEmployee({
+                        variables: {
+                          id: empl.node.id,
+                        },
+                      });
+                    } catch (err) {
+                      alert(err.message);
+                    }
+                    if (empl.node.id === dataSingleEmployee?.employee.id) {
+                      await getSingleEmployee({
+                        variables: {
+                          id: empl.node.id,
+                        },
+                      });
+                    }
+                  }}
+                />
+                <EditIcon
+                  className={styles.employeeList__edit}
+                  onClick={() => {
+                    setEditedId(empl.node.id);
+                    setName(empl.node.name);
+                    setJoinYear(empl.node.joinYear);
+                    setSelectedDept(empl.node.department.id);
+                  }}
+                />
+              </div>
             </li>
           ))
         }
@@ -24,4 +73,4 @@ const EmployeeList = ({ dataEmployees }) => {
   );
 };
 
-export default EmployeeList
+export default EmployeeList;

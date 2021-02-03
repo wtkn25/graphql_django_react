@@ -28,6 +28,7 @@ export const GET_EMPLOYEES = gql`
           name
           joinYear
           department {
+            id
             deptName
           }
         }
@@ -76,6 +77,16 @@ export const UPDATE_EMPLOYEE = gql`
           id
           deptName
         }
+      }
+    }
+  }
+`
+
+export const DELETE_EMPLOYEE = gql`
+  mutation ($id: ID!) {
+    deleteEmployee(input: {id: $id}){
+      employee {
+        id
       }
     }
   }
