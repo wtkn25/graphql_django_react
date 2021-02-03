@@ -4,6 +4,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import jwtDecode from "jwt-decode";
 import React, { useEffect } from 'react';
 import { GET_DEPTS, GET_EMPLOYEES } from "../queries";
+import EmployeeCreate from "./EmployeeCreate";
 import EmployeeList from "./EmployeeList";
 import styles from "./MainPage.module.css";
 
@@ -52,6 +53,7 @@ const MainPage = () => {
           }}
         />
       </h1>
+      <EmployeeCreate dataDepts={dataDepts} />
       <Grid container>
         <Grid item xs={5}>
           <EmployeeList dataEmployees={dataEmployees} />
