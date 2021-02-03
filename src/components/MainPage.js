@@ -8,7 +8,10 @@ import DeptList from "./DeptList";
 import EmployeeCreate from "./EmployeeCreate";
 import EmployeeDetails from "./EmployeeDetails";
 import EmployeeList from "./EmployeeList";
+import FilterByAnd from "./FilterByAnd";
+import FilterByName from "./FilterByName";
 import styles from "./MainPage.module.css";
+import Pagination from "./Pagination";
 
 const MainPage = () => {
   const {
@@ -62,6 +65,17 @@ const MainPage = () => {
         </Grid>
         <Grid item xs={4}><EmployeeDetails /></Grid>
         <Grid item xs={3}><DeptList dataDepts={dataDepts} /></Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={2}>
+          <FilterByName />
+        </Grid>
+        <Grid item xs={3}>
+          <FilterByAnd />
+        </Grid>
+        <Grid item xs={7}>
+          <Pagination />
+        </Grid>
       </Grid>
     </div>
   )
